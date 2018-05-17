@@ -1,0 +1,50 @@
+<h2 class=" text-center">
+  Select
+</h2>
+<div class="text-center">
+  Year:
+  <select id="yearSelect" #y (change)="year(y.value)">
+    <option value=0>No Year</option>
+    <option *ngFor="let y of years | async" [value]="y">{{y}}</option>
+  </select>
+</div>
+<div class="text-center">
+  Make:
+  <select id="makeSelect" #m (change)="make(m.value)">
+      <option value="0">No Make</option>
+    <option *ngFor="let m of makes | async" [value]="m">{{m}}</option>
+  </select>
+</div>
+<div class="text-center">
+  <button (click)="refresh()">
+        Refresh Table
+      </button>
+</div>
+
+<h2>Table</h2>
+<table class="table table-hover">
+
+  <tr>
+    <th>ID</th>
+    <th>YEAR</th>
+    <th>MAKE</th>
+    <th>MODEL</th>
+  </tr>
+  <tr *ngFor="let m of filteredModels | async">
+    <td>
+      {{m.id}}
+    </td>
+    <td>
+      {{m.year}}
+    </td>
+    <td>
+      {{m.make}}
+    </td>
+    <td>
+      {{m.model}}
+    </td>
+
+  </tr>
+</table>
+<button [disabled]="isInvalid()" (click)="offsetAdd(-10)">Previous</button>
+<button (click)="offsetAdd(10)">Next</button>
